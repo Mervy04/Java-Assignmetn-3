@@ -149,6 +149,7 @@ public class PERT {
     }
     */
 
+/*
 package com.company;
 
 import java.io.File;
@@ -174,9 +175,62 @@ public class PERT {
     public void addTask(int id, )
 
 
+}
+*/
+
+package com.company;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+import static com.company.ProjectConstants.*;
+
+public class PERT {
+
+    // data fields
+    private double[][] data = new double[MAXTASKS][MAXCOLUMNS];
+    private boolean expectedTimeDone;
+    private boolean forwardPassDone;
+    private boolean backwardPassDone;
+    private boolean slackDone;
+
+    // public methods
+
+    public void addTask(int id,double opt, double pess, double ml, int [] pred, int [] succ ){
+
+    }
+
+    public void displayTask(int id){
+
+    }
+
+    public void displayAllTaskData(){
+
+    }
+
+
+    public void displayAllPaths(){
+
+    }
+
+
 
 
     }
+
+
+
+
+
+
+
+
+
+    
 
 
 
