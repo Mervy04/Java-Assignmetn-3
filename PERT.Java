@@ -178,6 +178,7 @@ public class PERT {
 }
 */
 
+/*
 package com.company;
 
 import java.io.File;
@@ -221,6 +222,262 @@ public class PERT {
 
 
     }
+*/
+
+package com.company;
+
+import java.io.*;
+import java.io.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.text.DecimalFormat;
+
+import static com.company.ProjectConstants.*;
+
+public class PERT {
+
+    private final static String seperator = "\n===========================================================================\n";
+
+    // data fields
+    private double[][] mydataArray = new double[MAXTASKS][MAXCOLUMNS];
+    private boolean expectedTimeDone;
+    private boolean forwardPassDone;
+    private boolean backwardPassDone;
+    private boolean slackDone;
+
+    // creation of variables
+
+    private int numDataItems = 0;
+    private double pertt = 0;
+
+
+   /*
+    // initializing scanner object
+
+
+
+
+    // first way to storing csv into array (works partially)
+    public static void csvarray(){
+
+        // initializing scanner object
+        Scanner scanner = null;
+
+         double [][] data = new double[MAXTASKS][MAXCOLUMNS];
+         String InputLine = "";
+         double xnum = 0;
+         String xfileLocation;
+         xfileLocation = "C:\\Users\\Mervy\\IdeaProjects\\Java Assignment 3 - PERT\\STDnegative.csv";
+         System.out.println("This is STD negative\n");
+         System.out.println("\n ***** Setting up Array *******");
+
+         try
+         {
+             scanner = new Scanner(new BufferedReader(new FileReader(xfileLocation))); // set up a scanner
+
+
+            while (scanner.hasNextLine()){
+                // while ((InputLine = scanner.nextline()) != null)\
+
+                InputLine = scanner.nextLine(); // Read line in from file
+                String[] InArray = InputLine.split(","); // split the inputline into an array at the commas.
+
+                for (int i = 0; i < InArray.length; i++){ // copy and store the content store in the "InArray" into the main array
+                    data [0][ MAXCOLUMNS] = Double.parseDouble(InArray[i]);
+                }
+                System.out.println(seperator);
+
+                // increment the row in the array
+
+                System.out.println();
+
+            }
+
+
+         } catch (FileNotFoundException e) {
+             e.printStackTrace();
+         }
+
+         catch (Exception e){
+             System.out.println(e);
+         }
+    }
+
+    */
+
+    // String path = "C:\\Users\\Mervy\\IdeaProjects\\Java Assignment 3 - PERT\\STDnegative.csv";
+    // String line = "";
+
+
+
+   /* public static void submain() {
+        double[][] data = new double[MAXTASKS][MAXCOLUMNS];
+
+        String path = "C:\\Users\\Mervy\\IdeaProjects\\Java Assignment 3 - PERT\\STDnegative.csv";
+        String line = "";
+
+        try {
+            BufferedReader br = null;
+            try {
+                br = new BufferedReader(new FileReader(path));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+
+                for (int i = 0; i < values.length; i++) { // copy and store the content store in the "InArray" into the main array
+                    data[0][i] = Double.parseDouble(values[i]);
+
+                    System.out.println(values);
+
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    */
+
+    // this is a second test of storing my data in array
+
+    /*
+    public static void csvarray() throws Exception{
+
+        double[][] data = new double[MAXTASKS][MAXCOLUMNS];
+
+        List<List<String>> lines = new ArrayList<>();
+        Scanner inputStream;
+        // parsing the CSV file into Scanner class constructor
+
+        System.out.println("\n STD negative values without \n");
+        Scanner sc = new Scanner(new File("STDnegative.csv"));
+        sc.useDelimiter(","); // sets delimiter pattern
+        while (sc.hasNext()) // returns a boolean
+        {
+            System.out.print(sc.next()); // find and returns the next complete token from this scanner
+        }
+        sc.close(); // close the scanner
+
+        try{
+            System.out.println(" \n STD negative values with array \n ");
+            Scanner s = new Scanner(new File("STDnegative.csv"));
+
+            while(s.hasNext()){
+                String line= s.next();
+                String[] values = line.split(",");
+                // this adds the currently parsed line to the 2-dimensional string array
+                lines.add(Arrays.asList(values));
+
+                for (int i = 0; i < values.length; i++) { // copy and store the content store in the "InArray" into the main array
+
+                }
+            }
+
+            s.close();
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // the following code lets you iterate through the 2-dimensional array
+        int lineNo = 1;
+        for(List<String> line: lines) {
+            int columnNo = 1;
+            for (String value: line) {
+                System.out.println("Line " + lineNo + " Column " + columnNo + ": " + value);
+                columnNo++;
+            }
+            lineNo++;
+        }
+
+        // STD positive
+
+        // parsing the CSV file into Scanner class constructor
+
+        System.out.println("\n\t STD positve values without array \n ");
+        Scanner st = new Scanner(new File("STDpositive.csv"));
+        st.useDelimiter(","); // sets delimiter pattern
+        while (st.hasNext()) // returns a boolean
+        {
+            System.out.print(st.next()); // find and returns the next complete token from this scanner
+        }
+        st.close();; // close the scanner
+
+        try{
+            System.out.println(" \n STD positive values with array \n");
+            Scanner ss = new Scanner(new File("STDpositive.csv"));
+
+            while(ss.hasNext()){
+                String line= ss.next();
+                String[] values = line.split(",");
+                // this adds the currently parsed line to the 2-dimensional string array
+                lines.add(Arrays.asList(values));
+            }
+
+            ss.close();
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // the following code lets you iterate through the 2-dimensional array
+        int lineNom = 1;
+        for(List<String> line: lines) {
+            int columnNom = 1;
+            for (String value: line) {
+                System.out.println("Line " + lineNom + " Column " + columnNom + ": " + value);
+                columnNom++;
+            }
+            lineNom++;
+        }
+    }
+
+     */
+
+
+
+
+
+
+    // public methods
+
+    public void addDataItem(double data) {
+        mydataArray[numDataItems][MAXCOLUMNS] = data;
+        numDataItems++;
+
+        System.out.println(data);
+    }
+
+
+
+
+
+
+    public void addTask(int id,double opt, double pess, double ml, int [] pred, int [] succ ){
+
+    }
+
+    public void displayTask(int id){
+
+    }
+
+    public void displayAllTaskData(){
+
+    }
+
+
+    public void displayAllPaths(){
+
+    }
+
+
+
+}
 
 
 
