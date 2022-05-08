@@ -437,7 +437,7 @@ public class PERT {
         }
     }
 
-     */
+     
 
 
 
@@ -478,6 +478,79 @@ public class PERT {
 
 
 }
+*/
+    
+    package com.company;
+
+// importing our secondary classes.
+import static com.company.ProjectConstants.*;
+import static com.company.PERT.*;
+
+//importing our various utility classes
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.*;
+import java.util.Scanner;
+public class Main {
+
+    private final static int INVALID = -1;
+    private final static String seperator = "\n===========================================================================\n";
+
+
+    public static void main(String[] args) {
+
+        double d; // create a double "d"
+
+        boolean haveFileName; // creating a boolean for file name.
+
+        String uInFileName = "datafile2.txt"; // default text file name.
+
+        Scanner s = new Scanner(System.in); // create scanner class.
+
+        PERT pert = new PERT(); // Create secondary class object.
+
+        BufferedReader reader; // initialize buffered reader.
+
+        try{
+            do {
+                System.out.println("\tPlease enter the name of the file you would like to use: ");
+                haveFileName = false;
+
+                //stores user input in file name variable
+                if (s.hasNext()){
+                    uInFileName = s.next();
+                    haveFileName = true;
+                }
+            } while (!haveFileName);
+
+            reader = new BufferedReader(new FileReader(uInFileName));  // buffer reader reads file data
+            String line = reader.readLine();
+
+            while (line !=null){
+
+                try{
+                    d = Double.parseDouble(line);                       //converts data txt file values to doubles
+                    System.out.println(d + " is a double");
+                    System.out.println(line);
+
+                    pert.addDataItem(d);
+
+                } catch (NumberFormatException ex){
+                    System.out.println("\tWARNING: Data item from file is not a double... " + line);
+                }
+                line = reader.readLine();
+            }
+
+        } catch (Exception ex){
+            System.out.println("User input File Name: " + uInFileName);
+            System.out.println(ex.getMessage());
+        }
+
+
+
+    }
+}
+
 
 
 
